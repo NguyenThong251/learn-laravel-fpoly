@@ -1,0 +1,19 @@
+/* Error: Can't find stylesheet to import.
+ *   ,
+ * 1 | @import "../../node_modules/bootstrap/scss/_functions";
+ *   |         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ *   '
+ *   public\assets\clients\sass\_variable.scss 1:9   @import
+ *   public\assets\clients\sass\_component.scss 1:9  @import
+ *   public\assets\clients\sass\app.scss 2:9         root stylesheet */
+
+body::before {
+  font-family: "Source Code Pro", "SF Mono", Monaco, Inconsolata, "Fira Mono",
+      "Droid Sans Mono", monospace, monospace;
+  white-space: pre;
+  display: block;
+  padding: 1em;
+  margin-bottom: 1em;
+  border-bottom: 2px solid black;
+  content: "Error: Can't find stylesheet to import.\a   \2577 \a 1 \2502  @import \"../../node_modules/bootstrap/scss/_functions\";\d\a   \2502          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\a   \2575 \a   public\\assets\\clients\\sass\\_variable.scss 1:9   @import\a   public\\assets\\clients\\sass\\_component.scss 1:9  @import\a   public\\assets\\clients\\sass\\app.scss 2:9         root stylesheet";
+}
