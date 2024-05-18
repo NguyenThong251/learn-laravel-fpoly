@@ -17,6 +17,8 @@
               Category
             </h4>
             <div class="filter-checkbox d-flex flex-column gap-3">
+              @foreach ( $categories as $item)
+                
               <div
                 class="filter-check-group d-flex justify-content-between align-items-center"
               >
@@ -29,7 +31,7 @@
                     value=""
                     aria-label="Checkbox for following text input"
                   />
-                  <span class="fs-6 text-border-color">Juice & Drinks</span>
+                  <span class="fs-6 text-border-color">{{$item->name}}</span>
                 </div>
                 <div
                   class="filter-check-group-count-item fs-6 text-border-color"
@@ -37,47 +39,8 @@
                   [20]
                 </div>
               </div>
-              <div
-                class="filter-check-group d-flex justify-content-between align-items-center"
-              >
-                <div
-                  class="filter-check-group-input d-flex gap-2 align-items-center"
-                >
-                  <input
-                    class="form-check-input mt-0"
-                    type="checkbox"
-                    value=""
-                    aria-label="Checkbox for following text input"
-                  />
-                  <span class="fs-6 text-border-color">Dairy & Milk</span>
-                </div>
-                <div
-                  class="filter-check-group-count-item fs-6 text-border-color"
-                >
-                  [54]
-                </div>
-              </div>
-
-              <div
-                class="filter-check-group d-flex justify-content-between align-items-center"
-              >
-                <div
-                  class="filter-check-group-input d-flex gap-2 align-items-center"
-                >
-                  <input
-                    class="form-check-input mt-0"
-                    type="checkbox"
-                    value=""
-                    aria-label="Checkbox for following text input"
-                  />
-                  <span class="fs-6 text-border-color">Snack & Spice</span>
-                </div>
-                <div
-                  class="filter-check-group-count-item fs-6 text-border-color"
-                >
-                  [64]
-                </div>
-              </div>
+             
+              @endforeach
             </div>
             <h4
               class="filter-category-title fs-6 my-3 pb-3 border-bottom border-secondary border-2"
