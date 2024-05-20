@@ -8,6 +8,7 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\admin\AdminBlogController;
 use App\Http\Controllers\admin\AdminCategoryController;
 use App\Http\Controllers\admin\AdminCommentController;
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AdminLogoutController;
 use App\Http\Controllers\admin\AdminOrderController;
 use App\Http\Controllers\admin\AdminProductController;
@@ -47,7 +48,9 @@ Route::fallback(function () {
 Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('logout', [AdminLogoutController::class, 'index'])->name('logout');
-    
+    Route::get('login', [AdminController::class, 'login']);
+    Route::post('login', [AdminController::class, 'postlogin']);
+    Route::post('admin-dashboard',[AdminController::class, 'dashboard']);
     Route::prefix('products')->group( function() {
         Route::get('/',[AdminProductController::class,'index'])->name('allproduct');
         // Route::get('/edit',[AdminProductController::class,'index'])->name('editproduct');

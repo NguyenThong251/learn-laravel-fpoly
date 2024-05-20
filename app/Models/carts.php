@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class feedbacks extends Model
+class carts extends Model
 {
     use HasFactory;
     public function product()
@@ -13,8 +13,12 @@ class feedbacks extends Model
         return $this->belongsTo(products::class);
     }
 
+    public function bill()
+    {
+        return $this->belongsTo(bills::class);
+    }
     public function user()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(user::class);
     }
 }

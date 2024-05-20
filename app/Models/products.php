@@ -19,4 +19,22 @@ class products extends Model
         // dd($list);
         return $list;
     }
+    public function categories()
+    {
+        return $this->belongsTo(categories::class);
+    }
+    public function brands(){
+        return $this->belongsTo(brands::class);
+    }
+    public function galleries(){
+        return $this->belongsTo(galleries::class);
+    }
+    public function feedbacks()
+    {
+        return $this->hasMany(feedbacks::class);
+    }
+    public function carts()
+    {
+        return $this->hasMany(carts::class);
+    }
 }

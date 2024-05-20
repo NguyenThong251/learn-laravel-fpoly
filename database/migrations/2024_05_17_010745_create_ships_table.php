@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('ships', function (Blueprint $table) {
             $table->id();
+            $table->string('ship_name');
+            $table->decimal('ship_amount');
             $table->timestamps();
         });
     }
