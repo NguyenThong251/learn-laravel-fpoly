@@ -7,8 +7,8 @@ class="position-fixed z-4 top-0 bottom-0 start-0 h-100 bg-white w-100 shadow-sm"
     class="side-header-content px-3 w-250 d-flex justify-content-between align-items-center"
   >
     <a href="" class="sidebar-header-logo">
-      <img src="{{asset('assets/clients/images/logo.png')}}" alt="" width="100px" />
-    </a>
+      <img src="{{asset('assets/clients/images/logoo.png')}}" alt="" width="100px" />
+    </a>  
     <div class="sidebar-header-btn d-flex align-items-center gap-2">
       <button
         type="button"

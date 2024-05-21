@@ -25,5 +25,7 @@
             <script src="{{asset('assets/clients/js/wow.js')}}"></script>
             <script src="{{asset('assets/clients/js/bootstrap.min.js')}}"></script>
             <script src="{{asset('assets/clients/js/admin.js')}}"></script>
+            @yield('js')
+            @stack('script')
         </body>
         </html>

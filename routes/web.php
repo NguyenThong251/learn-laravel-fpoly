@@ -45,11 +45,11 @@ Route::fallback(function () {
     return response()->view('error.404', [], 404);
 });
 // admin routes 
-Route::prefix('admin')->group(function () {
+Route::get('login', [AdminController::class, 'login'])->name('loginAdmin');
+Route::middleware('auth.admin')->prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('logout', [AdminLogoutController::class, 'index'])->name('logout');
-    Route::get('login', [AdminController::class, 'login']);
-    Route::post('login', [AdminController::class, 'postlogin']);
+    Route::post('login', [AdminController::class, 'postlogin'])->name('login-form');
     Route::post('admin-dashboard',[AdminController::class, 'dashboard']);
     Route::prefix('products')->group( function() {
         Route::get('/',[AdminProductController::class,'index'])->name('allproduct');

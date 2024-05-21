@@ -10,7 +10,7 @@
       <div
         class="header-top-main align-items-center justify-content-between py-3"
       >
-        <img src="{{asset('assets/clients/images/logo.png')}}" alt="" class="logo-img logo" width="40" />
+        <img src="{{asset('assets/clients/images/logoo.png')}}" alt="" class="logo-img logo" width="40" />
 
         <div
           class="header-top-right d-flex align-items-center gap-3 fs-6 fw-medium"
