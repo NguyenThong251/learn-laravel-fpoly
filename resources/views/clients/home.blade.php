@@ -10,72 +10,35 @@
           class="carousel carousel-dark slide"
           data-bs-ride="carousel"
         >
-          <div class="carousel-indicators">
-            <button
-              type="button"
-              data-bs-target="#carouselExampleDark"
-              data-bs-slide-to="0"
-              class="active"
-              aria-current="true"
-              aria-label="Slide 1"
-            ></button>
-            <button
-              type="button"
-              data-bs-target="#carouselExampleDark"
-              data-bs-slide-to="1"
-              aria-label="Slide 2"
-            ></button>
-          </div>
-          <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
-              <img src="{{asset('assets/clients/images/banner.jpg')}}" class="d-block w-100" alt="..." />
-              <div
-                class="carousel-caption top-25 start-15 text-start d-none d-md-block"
-              >
-                <h3 class="fw-bold fs-2 py-3 wow fadeInUp">
-                  <span class="text-decoration-underline text-primary fw-bold"
-                    >100%</span
-                  >
-                  Organic Fruits
-                </h3>
-                <h1 class="fs-1 fw-bold pe-11 pb-3 wow fadeInUp">
-                  Explore fresh & juicy fruits.
-                </h1>
-                <span class="fs-6 fw-normal text-light-emphasis wow fadeInUp">
-                  Some representative placeholder content for the first slide.
-                </span>
-                <div class="mt-4 wow fadeInUp">
-                  <button class="btn btn-primary text-white fw-bold fs-5">
-                    Shop Now
-                  </button>
+        <div class="carousel-indicators">
+          @foreach($banners as $index => $banner)
+              <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="{{ $index }}" class="{{ $index == 0 ? 'active' : '' }}" aria-current="{{ $index == 0 ? 'true' : 'false' }}" aria-label="Slide {{ $index + 1 }}"></button>
+          @endforeach
+      </div>
+      <div class="carousel-inner">
+        @foreach($banners as $index => $banner)
+            <div class="carousel-item {{ $index == 0 ? 'active' : '' }}" data-bs-interval="10000">
+                <img src="{{  $banner->image }}" class="d-block w-100" alt="{{ $banner->title_1 }}" height="780" />
+                <div class="carousel-caption top-25 start-15 text-start d-none d-md-block">
+                    <h3 class="fw-bold fs-2 py-3 wow fadeInUp">
+                        <span class="text-decoration-underline text-primary fw-bold">100%</span>
+                        {{ $banner->title_1 }}
+                    </h3>
+                    <h1 class="fs-1 fw-bold pe-11 pb-3 wow fadeInUp">
+                      {{ $banner->title_2 }}
+                    </h1>
+                    <span class="fs-6 fw-normal text-light-emphasis wow fadeInUp">
+                        {{ $banner->description }}
+                    </span>
+                    <div class="mt-4 wow fadeInUp">
+                        <button class="btn btn-primary fw-bold fs-5">
+                          <a class="text-decoration-none text-white " href="{{route('products')}}"> Shop Now</a> 
+                        </button>
+                    </div>
                 </div>
-              </div>
             </div>
-            <div class="carousel-item" data-bs-interval="2000">
-              <img src="{{asset('assets/clients/images/banner-2')}}.jpg" class="d-block w-100" alt="..." />
-              <div
-                class="carousel-caption top-25 start-15 text-start d-none d-md-block"
-              >
-                <h3 class="fw-bold fs-2 py-3 wow fadeInUp">
-                  <span class="text-decoration-underline text-primary fw-bold"
-                    >100%</span
-                  >
-                  Organic Fruits
-                </h3>
-                <h1 class="fs-1 fw-bold pe-11 pb-3 wow fadeInUp">
-                  Explore fresh & juicy fruits.
-                </h1>
-                <span class="fs-6 fw-normal text-light-emphasis wow fadeInUp">
-                  Some representative placeholder content for the first slide.
-                </span>
-                <div class="mt-4 wow fadeInUp">
-                  <button class="btn btn-primary text-white fw-bold fs-5">
-                    Shop Now
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+        @endforeach
+    </div>
           <button
             class="carousel-control-prev"
             type="button"
@@ -103,58 +66,20 @@
             <div class="col-lg-4 col-12 p-3">
               <div class="section-categories-main">
                 <ul class="nav d-flex flex-column gap-2">
+                  @foreach ($categoriesLimit as $item)
                   <li
                     class="nav-item category-list border w-100 d-flex align-items-center justify-content-center py-3 border-2 rounded-2 border-light bg-third"
                   >
                     <button
                       class=" d-flex flex-column align-items-center fs-6 fw-medium btn"
                     >
-                      Cake & Milk
-                      <span class="text-black fw-normal lh-lg">(65)item</span>
+                      {{ $item->name }}
+                      <span class="text-black fw-normal lh-lg">({{ $item->product_count }})Product</span>
                     </button>
                   </li>
-                  <li
-                    class="nav-item category-list border w-100 d-flex align-items-center justify-content-center py-3 border-2 rounded-2 border-light bg-third"
-                  >
-                    <button
-                      class="d-flex flex-column align-items-center fs-6 fw-medium btn"
-                    >
-                      Cake & Milk
-                      <span class="text-black fw-normal lh-lg">(65)item</span>
-                    </button>
-                  </li>
-                  <li
-                    class="nav-item category-list border w-100 d-flex align-items-center justify-content-center py-3 border-2 rounded-2 border-light bg-third"
-                  >
-                    <button
-                      class="d-flex flex-column align-items-center fs-6 fw-medium btn"
-                    >
-                      Cake & Milk
-                      <span class="text-black fw-normal lh-lg">(65)item</span>
-                    </button>
-                  </li>
-                  <li
-                    class="nav-item category-list border w-100 d-flex align-items-center justify-content-center py-3 border-2 rounded-2 border-light bg-third"
-                  >
-                    <button
-                      class="d-flex flex-column align-items-center fs-6 fw-medium btn"
-                    >
-                      Cake & Milk
-                      <span class="text-black fw-normal lh-lg">(65)item</span>
-                    </button>
-                  </li>
-                  <li
-                    class="nav-item category-list border w-100 d-flex align-items-center justify-content-center py-3 border-2 rounded-2 border-light bg-third"
-                  >
-                    <button
-                      class="d-flex flex-column align-items-center fs-6 fw-medium btn"
-                    >
-                      Cake & Milk
-                      <span class="text-black fw-normal lh-lg">(65)item</span>
-                    </button>
-                  </li>
+                  @endforeach
                   <a
-                    href="#"
+                    href="{{route('products')}}"
                     class="nav-item text-decoration-none border w-100 d-flex align-items-center justify-content-center py-3 border-2 rounded-2 border-light bg-third"
                   >
                     <button
@@ -235,10 +160,9 @@
           <div
             class="section-header d-flex justify-content-center flex-column align-items-center mb-3"
           >
-            <h3 class="fw-bolder">Popular Products</h3>
+            <h3 class="fw-bolder">All Products</h3>
             <p class="w-50 text-center fs-6 text-border-color">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Animi nisi
-              facilis provident eos accusamus voluptatibus in
+              All popular etrade products
             </p>
           </div>
         </div>
@@ -258,42 +182,17 @@
                           name="arrow-forward-outline"
                         ></ion-icon>
                       </li>
+                      @foreach ( $categoriesLimit as $item)
                       <li
-                        class="p-3 cursor w-100 product-tab-list fs-6 fw-bold bg-third border border-1 rounded-2 d-flex align-items-center justify-content-between"
+                        class=" p-3 cursor w-100 product-tab-list fs-6 fw-bold bg-third border border-1 rounded-2 d-flex align-items-center justify-content-between"
                       >
-                        <span>Snack</span>
+                        <span>{{$item->name}}</span>
                         <ion-icon
                           class="fs-5"
                           name="arrow-forward-outline"
                         ></ion-icon>
                       </li>
-                      <li
-                        class="p-3 cursor w-100 product-tab-list fs-6 fw-bold bg-third border border-1 rounded-2 d-flex align-items-center justify-content-between"
-                      >
-                        <span>Vegetable</span>
-                        <ion-icon
-                          class="fs-5"
-                          name="arrow-forward-outline"
-                        ></ion-icon>
-                      </li>
-                      <li
-                        class="p-3 cursor w-100 product-tab-list fs-6 fw-bold bg-third border border-1 rounded-2 d-flex align-items-center justify-content-between"
-                      >
-                        <span>Fruit</span>
-                        <ion-icon
-                          class="fs-5"
-                          name="arrow-forward-outline"
-                        ></ion-icon>
-                      </li>
-                      <li
-                        class="p-3 cursor w-100 product-tab-list fs-6 fw-bold bg-third border border-1 rounded-2 d-flex align-items-center justify-content-between"
-                      >
-                        <span>Bakery</span>
-                        <ion-icon
-                          class="fs-5"
-                          name="arrow-forward-outline"
-                        ></ion-icon>
-                      </li>
+                       @endforeach
                     </ul>
                   </div>
                 </div>
@@ -302,7 +201,7 @@
                     class="product-banner position-relative rounded-2 overflow-hidden"
                   >
                     <img
-                      src="{{asset('assets/clients/images/product-banner')}}.jpg"
+                      src="{{asset('assets/clients/images/technology/banner/bg-image-9.jpg')}}"
                       class="align-middle img-cover"
                       alt=""
                     />
@@ -310,32 +209,36 @@
                       class="position-absolute top-10 start-5 banner-content d-flex flex-column"
                     >
                       <h2 class="text-white">Juicy</h2>
-                      <h1 class="text-warning fs-1 fw-bold">FRUIT</h1>
+                      <h1 class="text-warning fs-1 fw-bold">Tech</h1>
                       <span class="text-white fs-5 mb-2">100% Natural</span>
                       <div class="product-banner-btn">
                         <div class="btn btn-primary fw-bold text-white">
-                          Shop Now
+                          <a href="{{route('products')}}" class="text-decoration-none text-white">Shop Now</a>
+                          
                         </div>
                       </div>
                     </div>
                   </div>
+                  
                 </div>
               </div>
             </div>
             <div class="col-xl-9 col-lg-8 col-12">
               <div class="row g-3">
                 {{-- @if (!empty($products)) --}}
-                @foreach ($products as  $item)
+                @foreach ($productsAll as  $item)
                 <div class="col-xxl-3 col-xl-4 col-6 wow fadeInUp">
                   <div
                     class="position-relative card-product cursor card p-3 border border-2 bg-white border-light rounded-3 shadow-sm"
                   >
-                    <div class="card-header border-0 h-60 position-relative">
-                      <img
+                  <div class="card-header border-0 h-60 position-relative">
+                      <a href="{{route('detail',$item->id)}}">
+                        <img
                         src="{{$item->image}}"
                         alt=""
                         class="img-cover border border-2 border-light rounded-3"
-                      />
+                        />
+                      </a>
                       <div
                         class="card-side-view position-absolute translate-middle"
                       >
@@ -361,12 +264,16 @@
                         ></ion-icon>
                       </div>
                     </div>
+                    @if ($item->discount > 0)
                     <div class="product-sale position-absolute">
-                      <span
-                        class="text-sale py-1 px-4 rounded-2 text-white fw-bolder bg-primary"
-                        >Sale</span
-                      >
+                        <span class="text-sale py-1 px-3 rounded-2 text-white fw-medium fs-6 bg-primary">{{$item->discount}}%</span>
                     </div>
+                    @endif
+                    @if ($item->hot == 1)
+                    <div class="product-hot position-absolute">
+                      <span class=" py-1 px-3 rounded-2 text-white fw-medium fs-6 bg-danger shadow-sm">Hot</span>
+                  </div>
+                  @endif
                     <div class="card-body p-0 pt-3 border-0 text-center">
                       <h3 class="product-category fs-8 text-border-color">
                         {{$item->category_name}}
@@ -377,12 +284,10 @@
                       <div
                         class="product-price d-flex gap-2 justify-content-center fs-6 pt-2 align-items-center"
                       >
-                        <span class="price-new fw-bold text-primary"
-                          >$ <span>120.25</span></span
-                        >
-                        <del class="price-old text-border-color fw-normal"
-                          >$ <span>123.25</span></del
-                        >
+                      <span class="price-new fw-bold text-primary">$ <span>{{number_format($item->price_after_discount)}}</span></span>
+                      @if ($item->discount > 0)
+                      <del class="price-old text-border-color fw-normal">$ <span>{{$item->price}}</span></del>
+                      @endif
                       </div>
                     </div>
                   </div>
@@ -394,6 +299,9 @@
               
                
                 
+              </div>
+              <div class="d-flex justify-content-center align-items-center">
+                <button class="btn btn-primary fw-bolder mt-5 text-white ">Xem thêm</button>
               </div>
             </div>
           </div>

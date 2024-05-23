@@ -17,7 +17,7 @@
               Category
             </h4>
             <div class="filter-checkbox d-flex flex-column gap-3">
-              @foreach ( $categories as $item)
+              @foreach ( $categoriesAll as $item)
                 
               <div
                 class="filter-check-group d-flex justify-content-between align-items-center"
@@ -36,7 +36,7 @@
                 <div
                   class="filter-check-group-count-item fs-6 text-border-color"
                 >
-                  [20]
+                  [{{ $item->product_count }}]
                 </div>
               </div>
              
@@ -66,10 +66,32 @@
               >0</output
             >
             <div class="filter-price-range w-100 mt-3"></div>
-            <button class="btn btn-primary text-white fw-bolder">
-              Filter
-            </button>
             <h4
+            class="filter-category-title fs-6 my-3 pb-3 border-bottom border-secondary border-2"
+          >
+            Brand
+          </h4>
+          <div class="filter-checkbox d-flex flex-column gap-3">
+            @foreach ($brandsAll as $item)
+              
+           
+            <div
+              class="filter-check-group-input d-flex gap-2 align-items-center"
+            >
+              <input
+                class="form-check-input mt-0"
+                type="checkbox"
+                value=""
+                aria-label="Checkbox for following text input"
+              />
+              <span class="fs-6 text-border-color">{{$item -> brand_name}}</span>
+            </div>
+            @endforeach
+          </div>
+            <button class="btn btn-primary text-white fw-bolder mt-5">
+              Filter Product
+            </button>
+            {{-- <h4
               class="filter-category-title fs-6 my-3 pb-3 border-bottom border-secondary border-2"
             >
               Category
@@ -123,48 +145,9 @@
                 </div>
                 <div class="filter-color rounded-1 bg-info"></div>
               </div>
-            </div>
-            <h4
-              class="filter-category-title fs-6 my-3 pb-3 border-bottom border-secondary border-2"
-            >
-              Weight
-            </h4>
-            <div class="filter-checkbox d-flex flex-column gap-3">
-              <div
-                class="filter-check-group-input d-flex gap-2 align-items-center"
-              >
-                <input
-                  class="form-check-input mt-0"
-                  type="checkbox"
-                  value=""
-                  aria-label="Checkbox for following text input"
-                />
-                <span class="fs-6 text-border-color">20kg Pack</span>
-              </div>
-              <div
-                class="filter-check-group-input d-flex gap-2 align-items-center"
-              >
-                <input
-                  class="form-check-input mt-0"
-                  type="checkbox"
-                  value=""
-                  aria-label="Checkbox for following text input"
-                />
-                <span class="fs-6 text-border-color">30kg Pack</span>
-              </div>
-              <div
-                class="filter-check-group-input d-flex gap-2 align-items-center"
-              >
-                <input
-                  class="form-check-input mt-0"
-                  type="checkbox"
-                  value=""
-                  aria-label="Checkbox for following text input"
-                />
-                <span class="fs-6 text-border-color">2kg Pack</span>
-              </div>
-            </div>
-            <h4
+            </div> --}}
+          
+            {{-- <h4
               class="filter-category-title fs-6 my-3 pb-3 border-bottom border-secondary border-2"
             >
               Tages
@@ -207,7 +190,7 @@
                   >
                 </li>
               </ul>
-            </div>
+            </div> --}}
           </div>
         </div>
       </div>
@@ -220,9 +203,15 @@
               <h2
                 class="count-product fs-6 d-flex align-items-center justify-content-center"
               >
-                We found 29 items for you!
+                We found {{$productCount}} items for you!
               </h2>
-              <div
+              <div class="d-flex gap-3 ">
+                <div class="search">
+                  {{-- <form action="" >
+                  </form> --}}
+                  <input onfocus="this.value=''" class="form-control" type="text" name="search-product" id="search-product" placeholder="Search product">
+                </div>
+                 <div
                 class="shop-select d-flex align-items-center gap-1 border p-1 rounded-2 border-white bg-white"
               >
                 <span class="p-0">Sort:</span>
@@ -236,78 +225,23 @@
                   <option value="3">Three</option>
                 </select>
               </div>
+              </div>
+             
             </div>
           </div>
         </div>
-        <div class="row g-3">
-          <div class="col-xxl-3 col-xl-4 col-6 wow fadeInUp">
-            <div
-              class="position-relative card-product cursor card p-3 border border-2 bg-white border-light rounded-3 shadow-sm"
-            >
-              <div class="card-header border-0 h-60 position-relative">
-                <img
-                  src="{{asset('assets/clients/images/product1.jpg')}}"
-                  alt=""
-                  class="img-cover border border-2 border-light rounded-3"
-                />
-                <div
-                  class="card-side-view position-absolute translate-middle"
-                >
-                  <ion-icon
-                    class="p-2 rounded-5 bg-white border cursor"
-                    name="eye-outline"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
-                    data-bs-toggle="modal"
-                    data-bs-target="#staticBackdrop"
-                  ></ion-icon>
-                  <ion-icon
-                    class="p-2 rounded-5 bg-white border cursor"
-                    name="heart-outline"
-                  ></ion-icon>
-                </div>
-                <div
-                  class="add-to-cart position-absolute top-100 start-50 translate-middle"
-                >
-                  <ion-icon
-                    class="p-2 rounded-5 bg-third text-primary border"
-                    name="cart-outline"
-                  ></ion-icon>
-                </div>
-              </div>
-              <div class="product-sale position-absolute">
-                <span
-                  class="text-sale py-1 px-4 rounded-2 text-white fw-bolder bg-primary"
-                  >Sale</span
-                >
-              </div>
-              <div class="card-body p-0 pt-3 border-0 text-center">
-                <h3 class="product-category fs-8 text-border-color">
-                  Vegetable
-                </h3>
-                <span class="product-name hover-list fs-6 fw-medium"
-                  >Fresh organic villa farm lomon 500gm pack</span
-                >
-                <div
-                  class="product-price d-flex gap-2 justify-content-center fs-6 pt-2 align-items-center"
-                >
-                  <span class="price-new fw-bold text-primary"
-                    >$ <span>120.25</span></span
-                  >
-                  <del class="price-old text-border-color fw-normal"
-                    >$ <span>123.25</span></del
-                  >
-                </div>
-              </div>
-            </div>
-          </div>
+        <div class="row g-3" id="product-result">
+          @foreach ($productsAll as  $item)
+          @include('clients.partials.product_card', ['item' => $item])
+          @endforeach
         </div>
         <div class="row mt-5">
           <nav
             aria-label="..."
             class="wow fadeInRight mb-0 pb-0 d-flex justify-content-center"
           >
-            <ul class="pagination">
+          {{$productsAll -> links('pagination::bootstrap-5')}}
+            {{-- <ul class="pagination">
               <li class="page-item disabled">
                 <a class="page-link text-border-color">Previous</a>
               </li>
@@ -325,10 +259,29 @@
               <li class="page-item">
                 <a class="page-link text-border-color" href="#">Next</a>
               </li>
-            </ul>
+            </ul> --}}
           </nav>
         </div>
       </div>
     </div>
   </section>
 @endsection
+@section('js')
+    <script>
+      $(document).ready(function() {
+        $('#search-product').on('keyup', function(){
+          var search = $(this).val();
+          $.ajax({
+            url: "{{ route('products.search') }}",
+            type: "GET",
+            data: {
+              'search': search
+            },
+            success: function(data) {
+              $('#product-result').html(data);
+            }
+          });
+        })
+});
+    </script>
+  @endsection

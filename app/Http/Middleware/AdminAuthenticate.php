@@ -21,6 +21,6 @@ class AdminAuthenticate
         //     return $next($request);
         // }
         // return redirect('login');
-        return (Auth::check() && Auth::user()->role == 1) ? $next($request) : redirect('loginAdmin');
+        return (Auth::check() && Auth::user()->role_id == 1) ? $next($request) : redirect('loginAdmin')->withErrors(['msg' => 'Bạn không có quyền truy cập.']);
     }
 }

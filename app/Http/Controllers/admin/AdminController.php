@@ -22,13 +22,22 @@ class AdminController extends Controller
         // if (Auth::attempt([])) {
         //     # code...
         // }
-        return response() -> json(['status' => 'success']);
+        // return response() -> json(['status' => 'success']);
+
+        $credentials = $request->only('admin_email', 'admin_password');
+        if (Auth::attempt(['email' => $credentials['admin_email'], 'password' => $credentials['admin_password'], 'role_id'=> 1])) {
+                // return response()->json(['status' => 'success']);
+                // return redirect('dashboard');
+                return response()->json(['status' => 'success', 'redirect' => route('dashboard')]);
+                // return redirect()->route('dashboard');
+        } else {Auth::logout();
+            return response()->json(['errors' => ['msg' => 'Thông tin đăng nhập không chính xác hoặc bạn không có quyền truy cập.']], 422);
+        }
     }
 
     public function logout() {
         Auth::logout();
         return redirect('loginAdmin');
-
     }
     // public function postlogin(Request $request){
     //     // dd($request);

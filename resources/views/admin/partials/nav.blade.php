@@ -189,7 +189,7 @@ class="position-fixed z-4 top-0 bottom-0 start-0 h-100 bg-white w-100 shadow-sm"
       class="side-nav-item-content p-2 rounded-2 d-flex gap-3 align-items-center jus cursor hover-item"
     >
       <ion-icon class="text-primary fs-5" name="log-out"></ion-icon>
-      <a  class="fs-6 fw-medium text-dark text-decoration-none"  href="{{ route('logout') }}">Logout</a>
+      <a  class="fs-6 fw-medium text-dark text-decoration-none"  href="{{ route('logout.admin') }}">Logout</a>
     </div>
   </li>
 

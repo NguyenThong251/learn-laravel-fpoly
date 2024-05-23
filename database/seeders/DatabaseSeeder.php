@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\banner;
 use App\Models\brands;
 use App\Models\categories;
 use App\Models\products;
@@ -18,7 +19,8 @@ class DatabaseSeeder extends Seeder
     {
         brands::factory(10)->create();
         categories::factory(10)->create();
-        products::factory(10)->create();
+        products::factory(100)->create();
+        banner::factory(3)->create();
 
         // User::factory()->create([
         //     'name' => 'Test User',

@@ -41,5 +41,7 @@
             <script src="{{asset('assets/clients/js/owl.js')}}"></script>
             <script src="{{asset('assets/clients/js/wow.js')}}"></script>
             <script src="{{asset('assets/clients/js/bootstrap.min.js')}}"></script>
+            @yield('js')
+            @stack('script')
         </body>
         </html>

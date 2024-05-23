@@ -10,7 +10,7 @@
               <img src="{{asset('assets/clients/images/logoo.png')}}" alt="" width="120" />
             </div>
             {{-- action="{{"/admin-dashboard"}}" --}}
-            <form action="{{route('login-form')}}" method="POST" class="row g-3 needs-validation" id="loginAdminForm">
+            <form action="{{route('login.admin')}}" method="POST" class="row g-3 needs-validation" id="loginAdminForm">
               {{-- @if ($errors->any())
             <div class="alert alert-danger text-center">
               {{$errorMessage}}
@@ -100,10 +100,12 @@
       dataType: "json",
       success: function (response) {
         console.log(response);
-        
+        if (response.status === 'success') {
+                    window.location.href = response.redirect;
+                }
       },
       error: function(error){
-        // console.log(error);
+        console.log(error);
         $('.msg').show();
         let responseJSON = error.responseJSON.errors;
         if (Object.keys(responseJSON).length > 0) {

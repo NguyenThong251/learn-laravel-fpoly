@@ -17,15 +17,14 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
+            $table->text('description_detail')->nullable();
             $table->decimal('price',10,2)->default(0);
             $table->integer('quantity')->default(0);
             $table->string('image')->nullable();
             $table->integer('discount')->default(0);
-            $table->tinyInteger('bestseller')->default(0);
-            // $table->integer('category_id')->unsigned();
+            $table->tinyInteger('hot')->default(0);
+            $table->tinyInteger('hide')->default(0);
             $table->foreignId('category_id')->constrained('categories')->onDelete('cascade');
-            // $table->integer('brand_id');
-            // $table->foreign('brand_id')->references('id')->on('brands')->onDelete('cascade');
             $table->foreignId('brand_id')->constrained('brands')->onDelete('cascade');
             $table->timestamps();
         });

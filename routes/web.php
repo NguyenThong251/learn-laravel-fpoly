@@ -18,6 +18,7 @@ use App\Http\Controllers\admin\AdminUserController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\DetailController;
 use App\Http\Controllers\ForgotpassController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\PassnewController;
@@ -29,7 +30,9 @@ use App\Http\Controllers\WishlistController;
 //     return view('welcome');
 // });
 Route::get('/',[HomeController::class, 'index'])->name('home');
+Route::get('/detail/{slug}',[DetailController::class, 'detail'])->name('detail');
 Route::get('/products',[ProductController::class, 'index'])->name('products');
+Route::get('/products/search',[ProductController::class, 'search'])->name('products.search');
 Route::get('/about',[AboutController::class, 'index'])->name('about');
 Route::get('/blog',[BlogController::class, 'index'])->name('blog');
 Route::get('/contact',[ContactController::class, 'index'])->name('contact');
@@ -45,12 +48,13 @@ Route::fallback(function () {
     return response()->view('error.404', [], 404);
 });
 // admin routes 
-Route::get('login', [AdminController::class, 'login'])->name('loginAdmin');
+// middleware('auth.admin')->
+Route::get('loginAdmin', [AdminController::class, 'login'])->name('loginAdmin');
+Route::post('loginAdmin', [AdminController::class, 'postlogin'])->name('login.admin');
+Route::get('logoutAdmin', [AdminController::class, 'logout'])->name('logout.admin');
 Route::middleware('auth.admin')->prefix('admin')->group(function () {
-    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
-    Route::get('logout', [AdminLogoutController::class, 'index'])->name('logout');
-    Route::post('login', [AdminController::class, 'postlogin'])->name('login-form');
-    Route::post('admin-dashboard',[AdminController::class, 'dashboard']);
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::post('admin-dashboard',[AdminController::class, 'dashboard']);
     Route::prefix('products')->group( function() {
         Route::get('/',[AdminProductController::class,'index'])->name('allproduct');
         // Route::get('/edit',[AdminProductController::class,'index'])->name('editproduct');
