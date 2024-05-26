@@ -33,6 +33,7 @@ Route::get('/',[HomeController::class, 'index'])->name('home');
 Route::get('/detail/{slug}',[DetailController::class, 'detail'])->name('detail');
 Route::get('/products',[ProductController::class, 'index'])->name('products');
 Route::get('/products/search',[ProductController::class, 'search'])->name('products.search');
+Route::get('/products/filter',[ProductController::class, 'filter'])->name('products.filter');
 Route::get('/about',[AboutController::class, 'index'])->name('about');
 Route::get('/blog',[BlogController::class, 'index'])->name('blog');
 Route::get('/contact',[ContactController::class, 'index'])->name('contact');
@@ -53,7 +54,7 @@ Route::get('loginAdmin', [AdminController::class, 'login'])->name('loginAdmin');
 Route::post('loginAdmin', [AdminController::class, 'postlogin'])->name('login.admin');
 Route::get('logoutAdmin', [AdminController::class, 'logout'])->name('logout.admin');
 Route::middleware('auth.admin')->prefix('admin')->group(function () {
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
     // Route::post('admin-dashboard',[AdminController::class, 'dashboard']);
     Route::prefix('products')->group( function() {
         Route::get('/',[AdminProductController::class,'index'])->name('allproduct');

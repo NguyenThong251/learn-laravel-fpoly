@@ -10,13 +10,13 @@
         <div
           class="wow fadeInLeft filter position-sticky top-0 bg-third p-3 border border-1 border-secondary rounded-2"
         >
-          <div class="filter-category">
+          <div class="filter">
             <h4
               class="filter-category-title fs-6 my-3 pb-3 border-bottom border-secondary border-2"
             >
               Category
             </h4>
-            <div class="filter-checkbox d-flex flex-column gap-3">
+            <div class="filter-category d-flex flex-column gap-3">
               @foreach ( $categoriesAll as $item)
                 
               <div
@@ -28,7 +28,7 @@
                   <input
                     class="form-check-input mt-0"
                     type="checkbox"
-                    value=""
+                    value="{{$item->name}}"
                     aria-label="Checkbox for following text input"
                   />
                   <span class="fs-6 text-border-color">{{$item->name}}</span>
@@ -42,6 +42,57 @@
              
               @endforeach
             </div>
+            <h4
+              class="filter-category-title fs-6 my-3 pb-3 border-bottom border-secondary border-2"
+            >
+              Sort
+            </h4>
+            <div class="filter-sort d-flex flex-column gap-3">
+              <div
+              class="filter-check-group-input d-flex gap-2 align-items-center"
+            >
+              <input
+                class="form-check-input mt-0"
+                type="checkbox"
+                value="a-z"
+                aria-label="Checkbox for following text input"
+              />
+              <span class="fs-6 text-border-color">A-Z</span>
+            </div>
+              <div
+              class="filter-check-group-input d-flex gap-2 align-items-center"
+            >
+              <input
+                class="form-check-input mt-0"
+                type="checkbox"
+                value="z-a"
+                aria-label="Checkbox for following text input"
+              />
+              <span class="fs-6 text-border-color">Z-A</span>
+            </div>
+              <div
+              class="filter-check-group-input d-flex gap-2 align-items-center"
+            >
+              <input
+                class="form-check-input mt-0"
+                type="checkbox"
+                value="price-high-low"
+                aria-label="Checkbox for following text input"
+              />
+              <span class="fs-6 text-border-color">Price: high - low</span>
+            </div>
+              <div
+              class="filter-check-group-input d-flex gap-2 align-items-center"
+            >
+              <input
+                class="form-check-input mt-0"
+                type="checkbox"
+                value="price-low-high"
+                aria-label="Checkbox for following text input"
+              />
+              <span class="fs-6 text-border-color">Price: low - high</span>
+            </div>
+              </div>
             <h4
               class="filter-category-title fs-6 my-3 pb-3 border-bottom border-secondary border-2"
             >
@@ -71,7 +122,7 @@
           >
             Brand
           </h4>
-          <div class="filter-checkbox d-flex flex-column gap-3">
+          <div class="filter-brand d-flex flex-column gap-3">
             @foreach ($brandsAll as $item)
               
            
@@ -81,15 +132,18 @@
               <input
                 class="form-check-input mt-0"
                 type="checkbox"
-                value=""
+                value="{{$item -> brand_name}}"
                 aria-label="Checkbox for following text input"
               />
               <span class="fs-6 text-border-color">{{$item -> brand_name}}</span>
             </div>
             @endforeach
           </div>
-            <button class="btn btn-primary text-white fw-bolder mt-5">
-              Filter Product
+            <button class="btn-filter btn btn-primary text-white fw-bolder mt-5">
+              Filter 
+            </button>
+            <button class="btn btn-outline-primary  fw-bolder mt-5">
+              Reset 
             </button>
             {{-- <h4
               class="filter-category-title fs-6 my-3 pb-3 border-bottom border-secondary border-2"
@@ -211,20 +265,7 @@
                   </form> --}}
                   <input onfocus="this.value=''" class="form-control" type="text" name="search-product" id="search-product" placeholder="Search product">
                 </div>
-                 <div
-                class="shop-select d-flex align-items-center gap-1 border p-1 rounded-2 border-white bg-white"
-              >
-                <span class="p-0">Sort:</span>
-                <select
-                  class="form-select border-0 pe-5 py-0"
-                  aria-label="Default select example"
-                >
-                  <option selected>Featured</option>
-                  <option value="1">One</option>
-                  <option value="2">Two</option>
-                  <option value="3">Three</option>
-                </select>
-              </div>
+                
               </div>
              
             </div>
@@ -281,6 +322,31 @@
               $('#product-result').html(data);
             }
           });
+        })
+        $('.btn-filter').click(function(){
+          var selectedCategories = $('.filter-category input[type="checkbox"]:checked').map(function(){
+            return $(this).val();
+        }).get();
+          var selectedSortOptions  = $('.filter-sort input[type="checkbox"]:checked').map(function(){
+            return $(this).val();
+        }).get();
+        var priceRange = $('#rangeInput').val();
+          var selectedBrands = $('.filter-brand  input[type="checkbox"]:checked').map(function(){
+            return $(this).val();
+        }).get();
+            $.ajax({
+              url: "{{ route('products.filter') }}",
+              type: "GET",
+              data: {
+                categories: selectedCategories,
+                // sortOptions: selectedSortOptions,
+                // priceRange: priceRange,
+                // brands: selectedBrands
+              },
+              success: function(data) {
+                $('#product-result').html(data);
+              }
+            })
         })
 });
     </script>

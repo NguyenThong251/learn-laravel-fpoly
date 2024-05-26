@@ -54,10 +54,6 @@ class products extends Model
             ->get();
         return $relatedProducts;
     }
-    // count products
-    public function getProductCountByCategory(){
-            return DB::table($this->table)->where('hide', '=', 0)->count();
-    }
     //product search
     public function getProductsSearch($search){
         $list = DB::table($this->table)
@@ -68,12 +64,46 @@ class products extends Model
                 $query->where('products.name', 'LIKE', "%{$search}%")
                       ->orWhere('products.description', 'LIKE', "%{$search}%");
             })
+            
             ->orderBy('products.id', 'desc')
             ->paginate(15);
         // dd($list);
         
         return $list;
     }
+    // filter products
+    // , $sortOptions, $priceRange, $brands
+    public function filterProducts($categories, $sortOptions, $priceRange, $brands) {
+        $query = DB::table($this->table)
+            ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->select('products.*', 'categories.name as category_name')
+            ->where('products.hide', '=', 0);
+    
+        if (!empty($categories)) {
+            $query->whereIn('categories.name', $categories);
+        }
+    
+        if (!empty($priceRange)) {
+            // Assuming $priceRange is an array with 'min' and 'max' keys
+            $query->whereBetween('products.price', [$priceRange['min'], $priceRange['max']]);
+        }
+    
+        if (!empty($brands)) {
+            $query->whereIn('products.brand', $brands);
+        }
+    
+        if (!empty($sortOptions)) {
+            foreach ($sortOptions as $sortOption) {
+                // Assuming sortOptions is an array with valid sort columns and directions
+                list($column, $direction) = explode(':', $sortOption);
+                $query->orderBy($column, $direction);
+            }
+        } else {
+            $query->orderBy('products.id', 'desc');
+        }
+    
+        return $query->paginate(15);
+    }   
     public function categories()
     {
         return $this->belongsTo(categories::class);
